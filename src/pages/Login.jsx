@@ -52,7 +52,7 @@ function Login() {
       minH={"50vh"}
       align={"center"}
       justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
+      bg={useColorModeValue("gray.50", "gray.600")}
     >
       <Stack spacing={8} mx={"auto"} maxW={"md"} py={13} px={9}>
         <Stack align={"center"}>

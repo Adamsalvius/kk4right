@@ -2,12 +2,14 @@ import React from "react";
 import { authState } from "../stores/auths/atom";
 import productState from "../stores/products/atom";
 import { userState } from "../stores/users/atom";
+
 import { Box, Image, Text, Grid, Button, Heading } from "@chakra-ui/react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function Admin() {
-
+  const navigate = useNavigate();
   const products = useRecoilValue(productState);
   const users = useRecoilValue(userState);
 
@@ -33,6 +35,15 @@ function Admin() {
       </Box>
     );
   }
+  if (user.role === "user") {
+    
+     return (
+      <Box>
+        <Text>not allowed</Text>
+      </Box>
+    
+    ); 
+  }
 
   return (
     <Box >
@@ -43,10 +54,10 @@ function Admin() {
           <Grid margin={4} >
             <Box border="1px" borderColor="gray.300" align={"center"} key={product.id} to={`/product/${product.id}`}>
               <Image width="5rem" src={product.image} />
-              <Text fontWeight="semibold">{product.title}</Text>
-              <Text fontWeight="semibold">{product.category}</Text>
-              <Text fontWeight="semibold">rating {product.rating.rate}</Text>
-              <Text fontWeight="semibold">$ {product.price}</Text>
+              <Text >{product.title}</Text>
+              <Text >{product.category}</Text>
+              <Text >rating {product.rating.rate}</Text>
+              <Text >$ {product.price}</Text>
             </Box>
           </Grid>
         );
@@ -55,8 +66,9 @@ function Admin() {
       {users.map((user) => {
         return (
           <Box key={user.id}>
-            <Grid margin={4}border='1px' borderColor='gray.200' >
+            <Grid margin={4}border='1px' borderColor='gray.100' >
               <Box key={users} align={"center"}>
+
                 <Text key={user.email}>{user.email}</Text>
                 <Text key={user.username, user.id}>{user.username}</Text>
                 <Text key={user.password}>{user.password}</Text>
